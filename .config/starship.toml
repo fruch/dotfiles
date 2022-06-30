@@ -1,10 +1,32 @@
 [status]
 disabled = false
 symbol = "🔴 "
-success_symbol = "🟢 SUCCESS"
-format = '[$symbol$common_meaning$signal_name$maybe_int]($style) '
+success_symbol = "🟢"
+format = '[$symbol $common_meaning$signal_name$maybe_int]($style)'
 map_symbol = true
+
+[git_status]
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+up_to_date = "✓"
+untracked = ""
+stashed = ""
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = ""
+deleted = "🗑"
 
 
 [python]
-format = 'via [$symbol]($style)'
+format = '[$symbol]($style)'
+
+[gcloud]
+disabled = true
+
+[cmake]
+disabled = true
+
+[nodejs]
+disabled = true
