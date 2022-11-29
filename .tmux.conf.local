@@ -378,3 +378,6 @@ set -g @resurrect-capture-pane-contents 'on'
 
 bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
 bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xclip -selection clipboard -i"
+
+set-option -g default-shell "/bin/bash"
+set-option -g default-command bash
