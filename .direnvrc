@@ -9,7 +9,7 @@ use_python() {
 layout_virtualenv() {
     local pyversion=$1
     local pvenv=$2
-    if [ -n "$(which pyenv virtualenv)" ]; then
+    if [ -n "$(which pyenv-virtualenv)" ]; then
         pyenv virtualenv --force --quiet ${pyversion} ${pvenv}-${pyversion}
     fi
     pyenv local --unset
@@ -17,6 +17,6 @@ layout_virtualenv() {
 
 layout_activate() {
     if [ -n "$(which pyenv)" ]; then
-        source $(pyenv root)/versions/$1/bin/activate
+        source $PYENV_ROOT/versions/$1/bin/activate
     fi
 }

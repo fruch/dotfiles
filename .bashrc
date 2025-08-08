@@ -117,12 +117,6 @@ if ! shopt -oq posix; then
 fi
 
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-
 # - direnv: https://direnv.net/
 if [ -n "$(which direnv)" ]; then
   eval "$(direnv hook $(basename $SHELL))"
@@ -132,10 +126,11 @@ fi
 export LC_ALL=en_US.UTF-8
 
 eval "$(starship init bash)"
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
-export PATH="$HOME/gems/bin:$PATH"
+eval "$(gh copilot alias -- bash)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "$HOME/.local/bin/env"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+export SDM_APP_DOMAIN=app.eu.strongdm.com
