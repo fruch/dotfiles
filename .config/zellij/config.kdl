@@ -57,6 +57,7 @@ keybinds clear-defaults=false {
     // Replace C-b with C-a for tmux mode (your tmux prefix)
     shared_except "locked" {
         unbind "Ctrl b"
+        unbind "Ctrl p"
         bind "Ctrl a" { SwitchToMode "Tmux"; }
     }
 
