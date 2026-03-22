@@ -1,0 +1,3 @@
+*.wasm
+zellaude-hook.sh
+zellaude.json
