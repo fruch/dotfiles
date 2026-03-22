@@ -381,3 +381,6 @@ bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "xc
 
 set-option -g default-shell "/bin/bash"
 set-option -g default-command bash
+
+set -g allow-passthrough on
+
