@@ -42,5 +42,20 @@ layout {
             }
         }
     }
-    tab
+
+    tab name="SCT" cwd="~/projects/scylla-cluster-tests" {
+        pane
+    }
+    tab name="dtest" cwd="~/projects/scylla-dtest" {
+        pane
+    }
+    tab name="SMI" cwd="~/projects/scylla-machine-image" {
+        pane
+    }
+    tab name="qa-tasks" cwd="~/projects/qa-tasks" {
+        pane
+    }
+    tab name="scylla" cwd="~/projects/scylla" {
+        pane
+    }
 }
