@@ -1,0 +1,61 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zellaude.wasm"
+        }
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                // Right side only — clock + battery
+                format_left  ""
+                format_right "{command_battery} {datetime}"
+                format_space "#[bg=#2a2a3a] "
+
+                // Hide tabs and modes (zellaude handles those)
+                tab_normal    ""
+                tab_active    ""
+                tab_separator ""
+                mode_normal       ""
+                mode_tmux         ""
+                mode_locked       ""
+                mode_resize       ""
+                mode_scroll       ""
+                mode_enter_search ""
+                mode_search       ""
+                mode_rename_tab   ""
+                mode_rename_pane  ""
+                mode_pane         ""
+                mode_tab          ""
+                mode_move         ""
+                mode_session      ""
+
+                // Clock — colorful powerline style
+                datetime          "#[bg=#00afff,fg=#1a1a2e,bold] 🕐 {format} "
+                datetime_format   "%H:%M  %d %b %a"
+                datetime_timezone "Asia/Jerusalem"
+
+                // Battery — emoji + progress bar + color coded
+                command_battery_command    "bash ~/.config/zellij/scripts/battery.sh"
+                command_battery_format     "#[bg=#5fff00,fg=#1a1a2e,bold] {stdout}"
+                command_battery_interval   "30"
+                command_battery_rendermode "static"
+            }
+        }
+    }
+
+    tab name="SCT" cwd="~/projects/scylla-cluster-tests" {
+        pane
+    }
+    tab name="dtest" cwd="~/projects/scylla-dtest" {
+        pane
+    }
+    tab name="SMI" cwd="~/projects/scylla-machine-image" {
+        pane
+    }
+    tab name="qa-tasks" cwd="~/projects/qa-tasks" {
+        pane
+    }
+    tab name="scylla" cwd="~/projects/scylla" {
+        pane
+    }
+}

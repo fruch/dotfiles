@@ -126,11 +126,21 @@ fi
 export LC_ALL=en_US.UTF-8
 
 eval "$(starship init bash)"
-eval "$(gh copilot alias -- bash)"
 
 . "$HOME/.local/bin/env"
 
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
 export SDM_APP_DOMAIN=app.eu.strongdm.com
+
+# opencode
+export PATH=/home/fruch/.opencode/bin:$PATH
+alias opencode='systemd-run --user --scope -p MemoryMax=8G -p MemorySwapMax=2G --description=opencode $HOME/.opencode/bin/opencode'
+alias ocx='systemd-run --user --scope -p MemoryMax=8G -p MemorySwapMax=2G --description=ocx $HOME/.opencode/bin/ocx'
+
+# Auto-launch zellij in foot terminal (attach or create session)
+if [ -z "$ZELLIJ" ] && [ "$TERM" = "foot" ]; then
+    if command -v zellij &>/dev/null; then
+        zellij attach --create main
+        exit
+    fi
+fi
