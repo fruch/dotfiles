@@ -8,7 +8,8 @@
 - Pass literal text only: no `$(...)` and no unquoted `$VAR` lists. Compute values in a separate call first, then inline the result.
 - Never wait with `sleep N; check`. Use `run_in_background` for a command that ends, or Monitor with an until-loop for CI and long jobs.
 - `pkill`/`pgrep` exit 1 when nothing matches - append `|| true` when "no process" is fine.
-- After a file changes through Bash (sed, git checkout, rebase, a script), Read it again before using Edit/Write on it.
+- After a compaction or resume, or after a file changes through Bash (sed, git checkout, rebase, a script), Read it again before using Edit/Write on it. Edit by absolute path inside the current worktree.
+- After editing a hook script under `~/.claude/hooks/` (or any script a hook runs), run `bash -n <script>` before finishing. A syntax error in a PreToolUse hook makes every matching Bash call fail.
 - When the concurrent subagent limit is hit, wait for running agents to finish and queue the rest - never retry immediately.
 
 ## Ownership and evidence
@@ -17,6 +18,14 @@
 - Before a rebase or force-push, check whether another agent-manager session works on the same branch; if so, leave it to that session.
 - Push my own branches yourself - don't hand the push back to me.
 - Back bug reports and root-cause claims with a local reproduction or real data, not a guess.
+
+## GitHub and Python gotchas
+
+- `gh pr diff` takes no path filter. Fetch the ref and run `git diff base...head -- <path>`.
+- Before `gh pr create --head <fork>:<branch>`, push the branch to the fork and confirm with `git ls-remote` (otherwise "Head sha can't be blank").
+- Push temporary rebase or scratch branches to my fork, never to the upstream repo.
+- If `gh pr edit --add-reviewer` fails with a permissions error, don't retry. Tell me the reviewer must be requested manually.
+- `python -I` ignores the cwd and `PYTHON*` variables. Use it only for scripts that read downloaded data. For scripts that import repo code, run `uv run --directory <worktree> python -m ...` or pytest.
 
 ## Jenkins MCP (jenkins.scylladb.com)
 
