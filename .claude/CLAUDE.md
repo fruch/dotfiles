@@ -30,6 +30,9 @@
 - If `gh pr edit --add-reviewer` fails with a permissions error, don't retry. Tell me the reviewer must be requested manually.
 - `python -I` ignores the cwd and `PYTHON*` variables. Use it only for scripts that read downloaded data.
 - A script file puts its own folder at `sys.path[0]`, not the cwd, so `uv run --directory <worktree> python <script>` does not make repo code importable. For scripts that import repo code, run `PYTHONPATH=<worktree> uv run --directory <worktree> python <script>`, or `python -m ...`, or pytest. Never `uv run python <script>` alone.
+- Always give `uv run` the project root with `--directory <repo or worktree>`, otherwise uv fails with "does not appear to be a Python project" or "No module named ...". scylla-machine-image: `uv run --directory <root> --extra test pytest tests` (verified, 276 tests collect). scylla-dtest: `uv run --directory <root> pytest <file>` (pyproject.toml is at the repo root).
+- Before `git checkout <branch>` or `git worktree add <branch>`, run `git worktree list`. If the branch is checked out elsewhere, use `git checkout --detach upstream/<branch>` instead of retrying.
+- Before grep/Read/`git -C` on a path from an earlier step (scratchpad dirs, removed worktrees), confirm it exists with Glob. A "No such file or directory" means re-derive the path, not retry it.
 - `gh api` has no `-o` flag (that is `gh repo read-file`). Write a response to a file with `> <scratchpad file>`; for Actions logs add `--allow-escape-sequences`.
 - With `-H "Accept: application/vnd.github.raw"` never add `--jq` (raw file text is not JSON: "invalid character '#'"). Redirect to a scratchpad file with `>`, or use `gh repo read-file` for one repo file. In `--jq` over commits use `(.author.login // "none")`, since `.author` can be null.
 
